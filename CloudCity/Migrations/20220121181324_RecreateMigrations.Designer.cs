@@ -2,6 +2,7 @@
 using CloudCity.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -9,9 +10,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CloudCity.Migrations
 {
     [DbContext(typeof(CloudCityContext))]
-    partial class CloudCityContextModelSnapshot : ModelSnapshot
+    [Migration("20220121181324_RecreateMigrations")]
+    partial class RecreateMigrations
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

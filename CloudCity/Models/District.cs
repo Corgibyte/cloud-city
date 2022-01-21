@@ -1,7 +1,5 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Text.Json.Serialization;
 
 namespace CloudCity.Models
 {
@@ -10,7 +8,7 @@ namespace CloudCity.Models
     public int DistrictId { get; set; }
 
     [Required]
-    [StringLength(20)]
+    [StringLength(100)]
     public string Name { get; set; }
 
     [Required]

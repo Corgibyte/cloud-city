@@ -1,6 +1,4 @@
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CloudCity.Models
 {
@@ -9,7 +7,7 @@ namespace CloudCity.Models
     public int LocationId { get; set; }
 
     [Required]
-    [StringLength(20)]
+    [StringLength(50)]
     public string Name { get; set; }
 
     [StringLength(1000)]
