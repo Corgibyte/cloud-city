@@ -50,11 +50,6 @@ API endpoints can be accessed using a client such as [Postman](https://www.postm
 
 To see endpoints, start the API server as described above and visit the [Swagger documentation](http://localhost:5000/swagger).
 
-###
-
-TODO:
-1. Add authentication/authorization
-
 ### Known bugs:
 
 * None as of 01/21/2022 10:45
