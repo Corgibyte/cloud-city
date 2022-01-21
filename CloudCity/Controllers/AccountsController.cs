@@ -28,14 +28,15 @@ namespace CloudCity.Controllers
     }
 
     //POST api/accounts/login
-    [HttpPost("login")]
-    public async Task<ActionResult> Login(string username, string password)
+    [HttpPost("authenticate")]
+    public async Task<ActionResult> Authenticate(string username, string password)
     {
-      Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager.PasswordSignInAsync(username, password, isPersistent: true, lockoutOnFailure: false);
+      var user = await _userManager.FindByNameAsync(username);
+      var result = await _signInManager.CheckPasswordSignInAsync(user, password, lockoutOnFailure: false);
       if (result.Succeeded)
       {
         //TODO: give token??
-        return Ok();
+        var token = generateJwtToken(result.)
       }
       else
       {
