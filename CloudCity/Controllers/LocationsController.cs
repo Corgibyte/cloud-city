@@ -1,7 +1,6 @@
 using CloudCity.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -21,11 +20,14 @@ namespace CloudCity.Controllers
 
     //GET api/locations
     [HttpGet]
-    public async Task<ActionResult> Get()
+    public async Task<ActionResult> Get(int districtId)
     {
-      List<Location> locations = await _db.Locations
-        .OrderBy(location => location.LocationId)
-        .ToListAsync();
+      IQueryable<Location> query = _db.Locations.Include(loc => loc.District).AsQueryable();
+      if (districtId != 0)
+      {
+        query = query.Where(loc => loc.DistrictId == districtId);
+      }
+      List<Location> locations = await query.OrderBy(location => location.LocationId).ToListAsync();
       return new JsonResult(locations);
     }
 
@@ -33,9 +35,7 @@ namespace CloudCity.Controllers
     [HttpGet("{id}")]
     public async Task<ActionResult<Location>> GetLocation(int id)
     {
-      Location location = await _db.Locations
-        .Include(loc => loc.District)
-        .FirstOrDefaultAsync(dist => dist.LocationId == id);
+      Location location = await _db.Locations.FirstOrDefaultAsync(loc => loc.LocationId == id);
       if (location == null)
       {
         return NotFound();
@@ -68,7 +68,7 @@ namespace CloudCity.Controllers
       }
       catch (DbUpdateConcurrencyException)
       {
-        if (!_db.Locations.Any(dist => dist.LocationId == id))
+        if (!_db.Locations.Any(loc => loc.LocationId == id))
         {
           return NotFound();
         }
