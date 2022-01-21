@@ -33,7 +33,9 @@ namespace CloudCity.Controllers
     [HttpGet("{id}")]
     public async Task<ActionResult<District>> GetDistrict(int id)
     {
-      District district = await _db.Districts.FirstOrDefaultAsync(dist => dist.DistrictId == id);
+      District district = await _db.Districts
+        .Include(dist => dist.Locations)
+        .FirstOrDefaultAsync(dist => dist.DistrictId == id);
       if (district == null)
       {
         return NotFound();

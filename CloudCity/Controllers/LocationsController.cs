@@ -33,7 +33,9 @@ namespace CloudCity.Controllers
     [HttpGet("{id}")]
     public async Task<ActionResult<Location>> GetLocation(int id)
     {
-      Location location = await _db.Locations.FirstOrDefaultAsync(dist => dist.LocationId == id);
+      Location location = await _db.Locations
+        .Include(loc => loc.District)
+        .FirstOrDefaultAsync(dist => dist.LocationId == id);
       if (location == null)
       {
         return NotFound();
