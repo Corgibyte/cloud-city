@@ -22,7 +22,9 @@ namespace CloudCity.Controllers
     [HttpGet]
     public async Task<ActionResult> Get()
     {
-      List<Location> locations = await _db.Locations.OrderBy(location => location.Name).ToListAsync();
+      List<Location> locations = await _db.Locations
+        .OrderBy(location => location.LocationId)
+        .ToListAsync();
       return new JsonResult(locations);
     }
 

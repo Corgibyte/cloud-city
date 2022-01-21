@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CloudCity.Models
 {
@@ -18,6 +19,8 @@ namespace CloudCity.Models
     public int Level { get; set; }
 
     public int DistrictId { get; set; }
+
+    [InverseProperty("Locations")]
     public virtual District District { get; set; }
   }
 }
