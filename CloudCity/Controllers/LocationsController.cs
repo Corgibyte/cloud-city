@@ -23,6 +23,7 @@ namespace CloudCity.Controllers
     public async Task<ActionResult> Get()
     {
       List<Location> locations = await _db.Locations
+        .Include(location => location.District)
         .OrderBy(location => location.LocationId)
         .ToListAsync();
       return new JsonResult(locations);
