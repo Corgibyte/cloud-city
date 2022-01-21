@@ -1,3 +1,5 @@
+![Photo of Cloud City](/cloudcity.jpg)
+
 # Cloud City API
 
 By Hannah Young
