@@ -53,8 +53,8 @@ To see endpoints, start the API server as described above and visit the [Swagger
 ###
 
 TODO:
-1. Add static endpoints documentation
-2. Implement search parameters
+1. Implement search parameters
+2. Add static endpoints documentation
 3. Add authentication/authorization
 
 ### Known bugs:
