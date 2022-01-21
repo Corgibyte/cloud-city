@@ -14,7 +14,7 @@ namespace CloudCity.Models
     public string Name { get; set; }
 
     [Required]
-    [StringLength(300)]
+    [StringLength(1000)]
     public string Description { get; set; }
 
     public virtual ICollection<Location> Locations { get; set; }
