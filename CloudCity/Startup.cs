@@ -1,13 +1,17 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.IdentityModel.Tokens;
 using CloudCity.Models;
+using System.Text;
 
 namespace CloudCity
 {
@@ -44,6 +48,26 @@ namespace CloudCity
         options.Password.RequireUppercase = false;
         options.Password.RequiredUniqueChars = 0;
       });
+      //jwt??
+      var jwtSection = Configuration.GetSection("JwtBearerTokenSettings");
+      services.Configure<JwtBearerTokenSettings>(jwtSection);
+      var jwtBearerTokenSettings = jwtSection.Get<JwtBearerTokenSettings>();
+      var key = Encoding.ASCII.GetBytes(jwtBearerTokenSettings.SecretKey);
+      services.AddAuthentication(options =>
+      {
+        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+      })
+        .AddJwtBearer(options =>
+        {
+          options.RequireHttpsMetadata = false;
+          options.SaveToken = true;
+          options.TokenValidationParameters = new TokenValidationParameters()
+          {
+            ValidateIssuer = true,
+            ValidIssuer = jwtBearerTokenSettings.Issuer,
+          }
+        })
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -57,7 +81,7 @@ namespace CloudCity
       // app.UseHttpsRedirection();
 
       app.UseRouting();
-
+      app.UseAuthentication();
       app.UseAuthorization();
 
       app.UseEndpoints(endpoints =>

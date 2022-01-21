@@ -36,7 +36,8 @@ namespace CloudCity.Controllers
       if (result.Succeeded)
       {
         //TODO: give token??
-        var token = generateJwtToken(result.)
+        var token = generateJwtToken(user);
+        return new AuthenticateResponse
       }
       else
       {

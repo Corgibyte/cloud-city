@@ -1,0 +1,4 @@
+namespace CloudCity.Services
+{
+  [AUthorize]
+}
