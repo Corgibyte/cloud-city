@@ -1,9 +1,10 @@
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 
 namespace CloudCity.Models
 {
-  public class CloudCityContext : DbContext
+  public class CloudCityContext : IdentityDbContext<ApplicationUser>
   {
     public DbSet<District> Districts { get; set; }
     public DbSet<Location> Locations { get; set; }
@@ -12,6 +13,7 @@ namespace CloudCity.Models
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
+      base.OnModelCreating(builder);
       builder.Entity<District>()
         .HasData(
           new District
