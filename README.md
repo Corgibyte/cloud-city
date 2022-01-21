@@ -63,7 +63,7 @@ API endpoints can be accessed using a client such as [Postman](https://www.postm
 |Create Location | POST    | `http://localhost:5000/locations/` | Location<sup>*</sup> |
 |Edit Location | PUT    | `http://localhost:5000/locations/{id}` | Location<sup>*</sup> |
 |Delete Location | DELETE    | `http://localhost:5000/locations/{id}` | |
-|||||
+
 
 *See below for example schemas for Districts and Locations
 †Optional filtering parameter
