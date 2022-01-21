@@ -1,9 +1,10 @@
+using CloudCity.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
-using CloudCity.Models;
 
 namespace CloudCity.Controllers
 {
@@ -23,7 +24,6 @@ namespace CloudCity.Controllers
     public async Task<ActionResult> Get()
     {
       List<Location> locations = await _db.Locations
-        .Include(location => location.District)
         .OrderBy(location => location.LocationId)
         .ToListAsync();
       return new JsonResult(locations);
@@ -40,7 +40,7 @@ namespace CloudCity.Controllers
       {
         return NotFound();
       }
-      return location;
+      return new JsonResult(location);
     }
 
     //POST api/locations

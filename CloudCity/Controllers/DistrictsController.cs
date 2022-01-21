@@ -24,7 +24,6 @@ namespace CloudCity.Controllers
     {
       List<District> districts = await _db.Districts
         .OrderBy(district => district.DistrictId)
-        .Include(dist => dist.Locations)
         .ToListAsync();
       return new JsonResult(districts);
     }

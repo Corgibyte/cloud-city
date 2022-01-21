@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -22,5 +23,10 @@ namespace CloudCity.Models
 
     [InverseProperty("Locations")]
     public virtual District District { get; set; }
+
+    public bool ShouldSerializeDistrict()
+    {
+      return District != null;
+    }
   }
 }

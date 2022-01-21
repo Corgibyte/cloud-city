@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System;
 
 namespace CloudCity.Models
 {
@@ -22,6 +23,11 @@ namespace CloudCity.Models
     public District()
     {
       Locations = new HashSet<Location>();
+    }
+
+    public bool ShouldSerializeLocations()
+    {
+      return Locations.Count > 0;
     }
   }
 }
