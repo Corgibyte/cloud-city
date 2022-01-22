@@ -55,6 +55,7 @@ namespace CloudCity
       var key = Encoding.ASCII.GetBytes(jwtBearerTokenSettings.SecretKey);
       services.AddAuthentication(options =>
       {
+        //WHY DOESN'T THIS WORK????
         options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
         options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
       })

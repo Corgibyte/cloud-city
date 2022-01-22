@@ -73,6 +73,7 @@ namespace CloudCity.Controllers
       };
       var token = tokenHandler.CreateToken(tokenDescriptor);
       return tokenHandler.WriteToken(token);
+      //HOW DO YOU RETURN A TOKEN AAGAGAGAJLLKJ
     }
 
     //TODO: add routes? 
